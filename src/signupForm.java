@@ -1,3 +1,9 @@
+
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -45,7 +51,7 @@ public class signupForm extends javax.swing.JFrame {
         jTextFieldLastName = new javax.swing.JTextField();
         jLabelPhoto = new javax.swing.JLabel();
         jLabelPhoto1 = new javax.swing.JLabel();
-        jButtonBrowse = new javax.swing.JButton();
+        jButtonBrowsePhoto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -187,13 +193,13 @@ public class signupForm extends javax.swing.JFrame {
         jLabelPhoto1.setForeground(new java.awt.Color(237, 245, 225));
         jLabelPhoto1.setOpaque(true);
 
-        jButtonBrowse.setBackground(new java.awt.Color(142, 228, 175));
-        jButtonBrowse.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonBrowse.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonBrowse.setText("Browse");
-        jButtonBrowse.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBrowsePhoto.setBackground(new java.awt.Color(142, 228, 175));
+        jButtonBrowsePhoto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonBrowsePhoto.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonBrowsePhoto.setText("Browse");
+        jButtonBrowsePhoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBrowseActionPerformed(evt);
+                jButtonBrowsePhotoActionPerformed(evt);
             }
         });
 
@@ -239,9 +245,9 @@ public class signupForm extends javax.swing.JFrame {
                                         .addComponent(jButtonLoginCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButtonLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabelPhoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabelPhoto1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonBrowse)
+                                .addComponent(jButtonBrowsePhoto)
                                 .addGap(0, 79, Short.MAX_VALUE))))))
             .addGroup(jPanelSignUp2Layout.createSequentialGroup()
                 .addGap(209, 209, 209)
@@ -276,14 +282,14 @@ public class signupForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelSignUp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSignUp2Layout.createSequentialGroup()
-                        .addGap(0, 54, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabelPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(77, 77, 77))
                     .addGroup(jPanelSignUp2Layout.createSequentialGroup()
-                        .addComponent(jButtonBrowse)
+                        .addComponent(jButtonBrowsePhoto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanelSignUp2Layout.createSequentialGroup()
-                        .addComponent(jLabelPhoto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelPhoto1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                         .addGap(35, 35, 35)))
                 .addGroup(jPanelSignUp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,11 +326,11 @@ public class signupForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelMinimizeMouseClicked
 
     private void jLabelCreateAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateAccountMouseClicked
-        signupForm supf = new signupForm();
-        supf.setVisible(true);
-        supf.pack();
-        supf.setLocationRelativeTo(null);
-        supf.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        loginForm logf = new loginForm();
+        logf.setVisible(true);
+        logf.pack();
+        logf.setLocationRelativeTo(null);
+        logf.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jLabelCreateAccountMouseClicked
 
@@ -340,9 +346,33 @@ public class signupForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldLastNameActionPerformed
 
-    private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonBrowseActionPerformed
+    private void jButtonBrowsePhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowsePhotoActionPerformed
+        JFileChooser filec = new JFileChooser();
+        filec.setCurrentDirectory(new File(System.getProperty("user.home")));
+        
+        // file extension
+        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("*.Images","jpg","png","gif");
+        filec.addChoosableFileFilter(fileFilter);
+        int fileState = filec.showOpenDialog(null);
+        
+        if (fileState == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = filec.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            
+            // display image in jlablel
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(jLabelPhoto1.getWidth(), jLabelPhoto1.getHeight(), java.awt.Image.SCALE_SMOOTH));
+        //label.setIcon(imageIcon);
+            
+            jLabelPhoto1.setIcon(imageIcon);
+        }
+        // if the user cancel
+        else if (fileState == JFileChooser.CANCEL_OPTION) {
+            System.out.println("No Image Selected");
+                
+        }
+            
+        
+    }//GEN-LAST:event_jButtonBrowsePhotoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -380,7 +410,7 @@ public class signupForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonBrowse;
+    private javax.swing.JButton jButtonBrowsePhoto;
     private javax.swing.JButton jButtonLogin1;
     private javax.swing.JButton jButtonLoginCancel;
     private javax.swing.JLabel jLabelClose;
