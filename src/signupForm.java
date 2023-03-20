@@ -1,7 +1,16 @@
 
+import java.awt.Image;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
@@ -18,6 +27,8 @@ public class signupForm extends javax.swing.JFrame {
     /**
      * Creates new form signupForm
      */
+    String imagePath = null;
+    
     public signupForm() {
         initComponents();
     }
@@ -40,7 +51,7 @@ public class signupForm extends javax.swing.JFrame {
         jLabelPassword = new javax.swing.JLabel();
         jPasswordFieldPassword = new javax.swing.JPasswordField();
         jButtonLoginCancel = new javax.swing.JButton();
-        jButtonLogin1 = new javax.swing.JButton();
+        jButtonCreate = new javax.swing.JButton();
         jLabelCreateAccount = new javax.swing.JLabel();
         jLabelUsername = new javax.swing.JLabel();
         jLabelLastName = new javax.swing.JLabel();
@@ -127,10 +138,15 @@ public class signupForm extends javax.swing.JFrame {
         jButtonLoginCancel.setForeground(new java.awt.Color(255, 255, 255));
         jButtonLoginCancel.setText("Cancel");
 
-        jButtonLogin1.setBackground(new java.awt.Color(142, 228, 175));
-        jButtonLogin1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonLogin1.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLogin1.setText("Create");
+        jButtonCreate.setBackground(new java.awt.Color(142, 228, 175));
+        jButtonCreate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonCreate.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonCreate.setText("Create");
+        jButtonCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreateActionPerformed(evt);
+            }
+        });
 
         jLabelCreateAccount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelCreateAccount.setForeground(new java.awt.Color(255, 255, 255));
@@ -244,7 +260,7 @@ public class signupForm extends javax.swing.JFrame {
                                     .addGroup(jPanelSignUp2Layout.createSequentialGroup()
                                         .addComponent(jButtonLoginCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButtonLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabelPhoto1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonBrowsePhoto)
@@ -292,7 +308,7 @@ public class signupForm extends javax.swing.JFrame {
                         .addComponent(jLabelPhoto1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                         .addGap(35, 35, 35)))
                 .addGroup(jPanelSignUp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonLoginCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jLabelCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,7 +340,15 @@ public class signupForm extends javax.swing.JFrame {
     private void jLabelMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinimizeMouseClicked
         this.setState(javax.swing.JFrame.ICONIFIED);
     }//GEN-LAST:event_jLabelMinimizeMouseClicked
-
+    
+    public ImageIcon resizePhoto(String picPath) {
+        
+        ImageIcon myImg = new ImageIcon(picPath);
+        Image img = myImg.getImage().getScaledInstance(jLabelPhoto1.getWidth(), jLabelPhoto1.getHeight(), java.awt.Image.SCALE_SMOOTH);
+        ImageIcon myPhoto = new ImageIcon(img);
+        return myPhoto;
+    }
+    
     private void jLabelCreateAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateAccountMouseClicked
         loginForm logf = new loginForm();
         logf.setVisible(true);
@@ -358,12 +382,15 @@ public class signupForm extends javax.swing.JFrame {
         if (fileState == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filec.getSelectedFile();
             String path = selectedFile.getAbsolutePath();
+            imagePath = path;
+            
             
             // display image in jlablel
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(jLabelPhoto1.getWidth(), jLabelPhoto1.getHeight(), java.awt.Image.SCALE_SMOOTH));
-        //label.setIcon(imageIcon);
+            // ImageIcon imageIcon = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(jLabelPhoto1.getWidth(), jLabelPhoto1.getHeight(), java.awt.Image.SCALE_SMOOTH));
+            jLabelPhoto1.setIcon(resizePhoto(path));
+            //label.setIcon(imageIcon);jLabelPhoto1.getWidth(), jLabelPhoto1.getHeight(), java.awt.Image.SC
             
-            jLabelPhoto1.setIcon(imageIcon);
+            //jLabelPhoto1.setIcon(new ImageIcon(path));
         }
         // if the user cancel
         else if (fileState == JFileChooser.CANCEL_OPTION) {
@@ -373,6 +400,36 @@ public class signupForm extends javax.swing.JFrame {
             
         
     }//GEN-LAST:event_jButtonBrowsePhotoActionPerformed
+
+    private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
+        
+        Connection connection = MyConnection.getConnection();
+        PreparedStatement ps;
+        
+        try {
+            ps = connection.prepareStatement("INSERT INTO `user`(`fname`, `lname`, `username`, `password`, `photo`) VALUES (?, ?, ?, ?, ?)");
+            ps.setString(1, jTextFieldFirstName.getText());
+            ps.setString(2, jTextFieldLastName.getText());
+            ps.setString(3, jTextFieldUsername.getText());
+            ps.setString(4, String.valueOf(jPasswordFieldPassword.getPassword()));
+            
+            InputStream img = new FileInputStream(new File(imagePath));
+            
+            
+            ps.setBlob(5, img);
+            
+            if (ps.executeUpdate() != 0) {
+                System.out.println("here");
+                JOptionPane.showMessageDialog(null, "Account Created!");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Something Wrong!");
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(signupForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonCreateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,7 +468,7 @@ public class signupForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBrowsePhoto;
-    private javax.swing.JButton jButtonLogin1;
+    private javax.swing.JButton jButtonCreate;
     private javax.swing.JButton jButtonLoginCancel;
     private javax.swing.JLabel jLabelClose;
     private javax.swing.JLabel jLabelConfirmPass;

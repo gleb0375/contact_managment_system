@@ -183,7 +183,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="jButtonLoginCancel" min="-2" pref="87" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jButtonLogin1" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <Component id="jButtonCreate" min="-2" pref="87" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jLabelPhoto1" pref="209" max="32767" attributes="0"/>
                                   </Group>
@@ -250,7 +250,7 @@
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonLogin1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jButtonCreate" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jButtonLoginCancel" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -310,7 +310,7 @@
             <Property name="text" type="java.lang.String" value="Cancel"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonLogin1">
+        <Component class="javax.swing.JButton" name="jButtonCreate">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="af" green="e4" red="8e" type="rgb"/>
@@ -323,6 +323,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Create"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCreateActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelCreateAccount">
           <Properties>
