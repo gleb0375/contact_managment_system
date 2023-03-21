@@ -2,10 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 
 /**
  *
- * @author User
+ * @author Hleb Hnatsiuk
  */
 public class loginForm extends javax.swing.JFrame {
 
@@ -136,6 +144,11 @@ public class loginForm extends javax.swing.JFrame {
         jButtonLogin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonLogin.setForeground(new java.awt.Color(255, 255, 255));
         jButtonLogin.setText("Login");
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginActionPerformed(evt);
+            }
+        });
 
         jLabelCreateAccount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelCreateAccount.setForeground(new java.awt.Color(255, 255, 255));
@@ -241,6 +254,29 @@ public class loginForm extends javax.swing.JFrame {
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabelCloseMouseClicked
+
+    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+       Connection connection = MyConnection.getConnection();
+       PreparedStatement ps;
+       ResultSet rs;
+       
+        try {
+            ps = connection.prepareStatement("SELECT * FROM `user` WHERE `username` =  ? AND `password` = ?");
+            ps.setString(1, jTextFieldUsername.getText());
+            ps.setString(2, String.valueOf(jPasswordField.getPassword()));
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Logged");
+            } 
+            else {
+                JOptionPane.showMessageDialog(null, "Login Error");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(loginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonLoginActionPerformed
 
     /**
      * @param args the command line arguments

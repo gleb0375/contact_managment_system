@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author User
+ * @author Hleb Hnatsiuk
  */
 public class MyConnection {
     

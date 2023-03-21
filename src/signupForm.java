@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author User
+ * @author Hleb Hnatsiuk
  */
 public class signupForm extends javax.swing.JFrame {
 
@@ -354,6 +355,29 @@ public class signupForm extends javax.swing.JFrame {
         this.setState(javax.swing.JFrame.ICONIFIED);
     }//GEN-LAST:event_jLabelMinimizeMouseClicked
     
+    public boolean isUsernameExist(String username) {
+       
+        boolean userExist = false;
+        Connection connection = MyConnection.getConnection();
+       PreparedStatement ps;
+       ResultSet rs;
+       
+        try {
+            ps = connection.prepareStatement("SELECT * FROM `user` WHERE `username` =  ? ");
+            ps.setString(1, jTextFieldUsername.getText());
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+               userExist = true;
+            } 
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(loginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return userExist;
+    }
+    
     public ImageIcon resizePhoto(String picPath) {
         
         ImageIcon myImg = new ImageIcon(picPath);
@@ -460,18 +484,20 @@ public class signupForm extends javax.swing.JFrame {
             ps.setString(4, String.valueOf(jPasswordFieldPassword.getPassword()));
             
             InputStream img = new FileInputStream(new File(imagePath));
-            
-            
             ps.setBlob(5, img);
             
-            if (ps.executeUpdate() != 0) {
-                System.out.println("here");
-                JOptionPane.showMessageDialog(null, "Account Created!");
+            if (isUsernameExist(jTextFieldUsername.getText())) {
+                JOptionPane.showMessageDialog(null, "User already exists!");
             }
             else {
-                JOptionPane.showMessageDialog(null, "Something Wrong!");
+                if (ps.executeUpdate() != 0) {
+                    JOptionPane.showMessageDialog(null, "Account Created!");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Something Wrong!");
+                }
             }
-            
+             
         } catch (Exception ex) {
             Logger.getLogger(signupForm.class.getName()).log(Level.SEVERE, null, ex);
         }
