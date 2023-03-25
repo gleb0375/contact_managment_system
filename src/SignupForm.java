@@ -26,14 +26,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Hleb Hnatsiuk
  */
-public class signupForm extends javax.swing.JFrame {
+public class SignupForm extends javax.swing.JFrame {
 
     /**
      * Creates new form signupForm
      */
     String imagePath = null;
     
-    public signupForm() {
+    public SignupForm() {
         initComponents();
     }
 
@@ -372,25 +372,25 @@ public class signupForm extends javax.swing.JFrame {
             } 
             
         } catch (SQLException ex) {
-            Logger.getLogger(loginForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return userExist;
     }
     
-    public ImageIcon resizePhoto(String picPath) {
-        
-        ImageIcon myImg = new ImageIcon(picPath);
-        Image img = myImg.getImage().getScaledInstance(100, 120, java.awt.Image.SCALE_SMOOTH);
-        ImageIcon myPhoto = new ImageIcon(img);
-        
-        //BufferedImage bimg = ImageIO.read(new ImageIcon(img));
-        //System.out.println(myPhoto.getImage().get);
-        return myPhoto;
-    }
+//    public ImageIcon resizePhoto(String picPath) {
+//        
+//        ImageIcon myImg = new ImageIcon(picPath);
+//        Image img = myImg.getImage().getScaledInstance(100, 120, java.awt.Image.SCALE_SMOOTH);
+//        ImageIcon myPhoto = new ImageIcon(img);
+//        
+//        //BufferedImage bimg = ImageIO.read(new ImageIcon(img));
+//        //System.out.println(myPhoto.getImage().get);
+//        return myPhoto;
+//    }
     
     private void jLabelCreateAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateAccountMouseClicked
-        loginForm logf = new loginForm();
+        LoginForm logf = new LoginForm();
         logf.setVisible(true);
         logf.pack();
         logf.setLocationRelativeTo(null);
@@ -411,32 +411,10 @@ public class signupForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldLastNameActionPerformed
 
     private void jButtonBrowsePhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowsePhotoActionPerformed
-        JFileChooser filec = new JFileChooser();
-        filec.setCurrentDirectory(new File(System.getProperty("user.home")));
+       MyFeatures mf = new MyFeatures();
+       imagePath = mf.browseImage(jLabelPhoto1);
         
-        // file extension
-        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("*.Images","jpg","png","gif");
-        filec.addChoosableFileFilter(fileFilter);
-        int fileState = filec.showOpenDialog(null);
         
-        if (fileState == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = filec.getSelectedFile();
-            String path = selectedFile.getAbsolutePath();
-            imagePath = path;
-            
-            
-            // display image in jlablel
-            // ImageIcon imageIcon = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(jLabelPhoto1.getWidth(), jLabelPhoto1.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            jLabelPhoto1.setIcon(resizePhoto(path));
-            //label.setIcon(imageIcon);jLabelPhoto1.getWidth(), jLabelPhoto1.getHeight(), java.awt.Image.SC
-            
-            //jLabelPhoto1.setIcon(new ImageIcon(path));
-        }
-        // if the user cancel
-        else if (fileState == JFileChooser.CANCEL_OPTION) {
-            System.out.println("No Image Selected");
-                
-        } 
     }//GEN-LAST:event_jButtonBrowsePhotoActionPerformed
 
     //check data in registration form
@@ -499,7 +477,7 @@ public class signupForm extends javax.swing.JFrame {
             }
              
         } catch (Exception ex) {
-            Logger.getLogger(signupForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignupForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
         
@@ -527,20 +505,21 @@ public class signupForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(signupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(signupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(signupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(signupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new signupForm().setVisible(true);
+                new SignupForm().setVisible(true);
             }
         });
     }
