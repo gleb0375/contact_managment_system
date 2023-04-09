@@ -451,8 +451,8 @@ public class SignupForm extends javax.swing.JFrame {
   
         if (verifData()) {
             
-        Connection connection = MyConnection.getConnection();
-        PreparedStatement ps;
+            Connection connection = MyConnection.getConnection();
+            PreparedStatement ps;
         
         try {
             ps = connection.prepareStatement("INSERT INTO `user`(`fname`, `lname`, `username`, `password`, `photo`) VALUES (?, ?, ?, ?, ?)");

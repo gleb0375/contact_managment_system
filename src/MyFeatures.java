@@ -19,9 +19,16 @@ public class MyFeatures {
     
     
     
-    public ImageIcon resizePhoto(String picPath, int width, int height) {
+    public ImageIcon resizePhoto(String picPath, byte[] mediumBLOBpic, int width, int height) {
+        ImageIcon myImg;
         
-        ImageIcon myImg = new ImageIcon(picPath);
+        if (picPath != null) {
+            myImg = new ImageIcon(picPath);           
+        } 
+        else {
+            myImg = new ImageIcon(mediumBLOBpic);           
+
+        }
         Image img = myImg.getImage().getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
         ImageIcon myPhoto = new ImageIcon(img);
         
@@ -47,7 +54,7 @@ public class MyFeatures {
  
             // display image in jlablel
             // ImageIcon imageIcon = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(jLabelPhoto1.getWidth(), jLabelPhoto1.getHeight(), java.awt.Image.SCALE_SMOOTH));
-            lbl.setIcon(resizePhoto(path, lbl.getWidth(), lbl.getHeight()));
+            lbl.setIcon(resizePhoto(path, null, lbl.getWidth(), lbl.getHeight()));
             //label.setIcon(imageIcon);jLabelPhoto1.getWidth(), jLabelPhoto1.getHeight(), java.awt.Image.SC
 
             //jLabelPhoto1.setIcon(new ImageIcon(path));

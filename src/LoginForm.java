@@ -260,14 +260,23 @@ public class LoginForm extends javax.swing.JFrame {
        PreparedStatement ps;
        ResultSet rs;
        
-        try {
-            ps = connection.prepareStatement("SELECT * FROM `user` WHERE `username` =  ? AND `password` = ?");
+        try {                                           
+            ps = connection.prepareStatement("SELECT `username`, `password`, `photo` FROM `user` WHERE `username` =  ? AND `password` = ?");
             ps.setString(1, jTextFieldUsername.getText());
             ps.setString(2, String.valueOf(jPasswordField.getPassword()));
             rs = ps.executeQuery();
             
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Logged");
+                MyContactsForm mcf = new MyContactsForm();
+                mcf.setVisible(true);
+                mcf.pack();
+                mcf.setLocationRelativeTo(null);
+                mcf.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+              
+                mcf.jLabelUserPhoto.setIcon(new MyFeatures().resizePhoto(null, rs.getBytes(3), mcf.jLabelUserPhoto.getWidth(), mcf.jLabelUserPhoto.getHeight()));
+                mcf.jLabelUsername.setText(rs.getString(1));
+                
+                this.dispose();
             } 
             else {
                 JOptionPane.showMessageDialog(null, "Login Error");

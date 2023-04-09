@@ -36,7 +36,8 @@ public class MyContactsForm extends javax.swing.JFrame {
         loginForm = new javax.swing.JLabel();
         jLabelClose = new javax.swing.JLabel();
         jLabelMinimize = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelUsername = new javax.swing.JLabel();
+        jLabelUserPhoto = new javax.swing.JLabel();
         jPanelLoginForm2 = new javax.swing.JPanel();
         jLabelFirstName = new javax.swing.JLabel();
         jLabelLastName = new javax.swing.JLabel();
@@ -55,6 +56,7 @@ public class MyContactsForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaAddress = new javax.swing.JTextArea();
         jButtonBrowsePhoto = new javax.swing.JButton();
+        jButtonAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -85,17 +87,23 @@ public class MyContactsForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Username");
+        jLabelUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelUsername.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelUsername.setText("Username");
+
+        jLabelUserPhoto.setBackground(new java.awt.Color(5, 56, 107));
+        jLabelUserPhoto.setMaximumSize(new java.awt.Dimension(89, 90));
+        jLabelUserPhoto.setMinimumSize(new java.awt.Dimension(50, 50));
+        jLabelUserPhoto.setOpaque(true);
 
         javax.swing.GroupLayout jPanelLoginForm1Layout = new javax.swing.GroupLayout(jPanelLoginForm1);
         jPanelLoginForm1.setLayout(jPanelLoginForm1Layout);
         jPanelLoginForm1Layout.setHorizontalGroup(
             jPanelLoginForm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLoginForm1Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelUserPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(187, 187, 187)
                 .addComponent(loginForm)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 358, Short.MAX_VALUE)
@@ -108,16 +116,16 @@ public class MyContactsForm extends javax.swing.JFrame {
             jPanelLoginForm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLoginForm1Layout.createSequentialGroup()
                 .addGroup(jPanelLoginForm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLoginForm1Layout.createSequentialGroup()
-                        .addGroup(jPanelLoginForm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelClose, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelLoginForm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabelClose, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelLoginForm1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(loginForm)))
-                .addContainerGap())
+                        .addGroup(jPanelLoginForm1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(loginForm)
+                            .addComponent(jLabelUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(29, Short.MAX_VALUE))
+            .addComponent(jLabelUserPhoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanelLoginForm2.setBackground(new java.awt.Color(55, 150, 131));
@@ -179,6 +187,8 @@ public class MyContactsForm extends javax.swing.JFrame {
         jLabelGroup.setText("Group:");
 
         jComboBoxGroup.setBackground(new java.awt.Color(237, 245, 225));
+        jComboBoxGroup.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jComboBoxGroup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Family", "Friends", "Work" }));
         jComboBoxGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxGroupActionPerformed(evt);
@@ -210,6 +220,16 @@ public class MyContactsForm extends javax.swing.JFrame {
         jButtonBrowsePhoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBrowsePhotoActionPerformed(evt);
+            }
+        });
+
+        jButtonAdd.setBackground(new java.awt.Color(142, 228, 175));
+        jButtonAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonAdd.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAdd.setText("Add");
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddActionPerformed(evt);
             }
         });
 
@@ -252,7 +272,11 @@ public class MyContactsForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBrowsePhoto))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLoginForm2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
         );
         jPanelLoginForm2Layout.setVerticalGroup(
             jPanelLoginForm2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,15 +319,19 @@ public class MyContactsForm extends javax.swing.JFrame {
                         .addGroup(jPanelLoginForm2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelAddress)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(228, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelLoginForm2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanelLoginForm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelLoginForm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanelLoginForm2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,6 +378,42 @@ public class MyContactsForm extends javax.swing.JFrame {
        System.out.println(imagePath);
     }//GEN-LAST:event_jButtonBrowsePhotoActionPerformed
 
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+
+        if (verifData()) {
+
+            Connection connection = MyConnection.getConnection();
+            PreparedStatement ps;
+
+            try {
+                ps = connection.prepareStatement("INSERT INTO `user`(`fname`, `lname`, `username`, `password`, `photo`) VALUES (?, ?, ?, ?, ?)");
+                ps.setString(1, jTextFieldFirstName.getText());
+                ps.setString(2, jTextFieldLastName.getText());
+                ps.setString(3, jTextFieldUsername.getText());
+                ps.setString(4, String.valueOf(jPasswordFieldPassword.getPassword()));
+
+                InputStream img = new FileInputStream(new File(imagePath));
+                ps.setBlob(5, img);
+
+                if (isUsernameExist(jTextFieldUsername.getText())) {
+                    JOptionPane.showMessageDialog(null, "User already exists!");
+                }
+                else {
+                    if (ps.executeUpdate() != 0) {
+                        JOptionPane.showMessageDialog(null, "Account Created!");
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Something Wrong!");
+                    }
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(SignupForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -386,9 +450,9 @@ public class MyContactsForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonBrowsePhoto;
     private javax.swing.JComboBox<String> jComboBoxGroup;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAddress;
     private javax.swing.JLabel jLabelClose;
     private javax.swing.JLabel jLabelEmail;
@@ -399,6 +463,8 @@ public class MyContactsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPhone;
     private javax.swing.JLabel jLabelProfilePhoto;
     private javax.swing.JLabel jLabelProfilePhotoText;
+    public javax.swing.JLabel jLabelUserPhoto;
+    public javax.swing.JLabel jLabelUsername;
     private javax.swing.JPanel jPanelLoginForm1;
     private javax.swing.JPanel jPanelLoginForm2;
     private javax.swing.JScrollPane jScrollPane1;
