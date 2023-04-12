@@ -1,5 +1,14 @@
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -380,37 +389,28 @@ public class MyContactsForm extends javax.swing.JFrame {
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
 
-        if (verifData()) {
-
-            Connection connection = MyConnection.getConnection();
-            PreparedStatement ps;
-
-            try {
-                ps = connection.prepareStatement("INSERT INTO `user`(`fname`, `lname`, `username`, `password`, `photo`) VALUES (?, ?, ?, ?, ?)");
-                ps.setString(1, jTextFieldFirstName.getText());
-                ps.setString(2, jTextFieldLastName.getText());
-                ps.setString(3, jTextFieldUsername.getText());
-                ps.setString(4, String.valueOf(jPasswordFieldPassword.getPassword()));
-
-                InputStream img = new FileInputStream(new File(imagePath));
-                ps.setBlob(5, img);
-
-                if (isUsernameExist(jTextFieldUsername.getText())) {
-                    JOptionPane.showMessageDialog(null, "User already exists!");
-                }
-                else {
-                    if (ps.executeUpdate() != 0) {
-                        JOptionPane.showMessageDialog(null, "Account Created!");
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(null, "Something Wrong!");
-                    }
-                }
-
-            } catch (Exception ex) {
-                Logger.getLogger(SignupForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        String fname = jTextFieldFirstName.getText();
+        String lname = jTextFieldLastName.getText();
+        String group = (String) jComboBoxGroup.getSelectedItem();
+        String phone = jTextFieldPhone.getText();
+        String email = jTextFieldEmail.getText();
+        String address = jTextAreaAddress.getText();
+        byte[] img = null;
+        try {
+            Path pth = Paths.get(imagePath);
+            img = Files.readAllBytes(pth);
+            
+            //String fname = jTextFieldFirstName.getText();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MyContactsForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MyContactsForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        Contact c = new Contact(null, fname, lname, group, phone, email, address, img, 0);
+        ContactQuery cq = new ContactQuery(); 
+        cq.insertContact(c);
+
 
     }//GEN-LAST:event_jButtonAddActionPerformed
 

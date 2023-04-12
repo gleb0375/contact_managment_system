@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author User
  */
-public class ContractQuery {
+public class ContactQuery {
     
     public boolean insertContact(Contact contact) {
         
@@ -45,7 +45,7 @@ public class ContractQuery {
 
 
         } catch (SQLException ex) {
-            Logger.getLogger(ContractQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ContactQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return contactIsCreated;

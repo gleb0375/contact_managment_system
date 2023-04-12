@@ -9,7 +9,7 @@
  */
 public class Contact {
     
-    private int cid;
+    private Integer cid;
     private String fname;
     private String lname;
     private String groupc;
@@ -24,7 +24,7 @@ public class Contact {
 
     
     
-    public Contact(int cid, String fname, String lname, String groupc, String phone, String email, String address, byte[] pic, int uid) {
+    public Contact(Integer cid, String fname, String lname, String groupc, String phone, String email, String address, byte[] pic, int uid) {
         this.cid = cid;
         this.fname = fname;
         this.lname = lname;
