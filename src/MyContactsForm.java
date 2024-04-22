@@ -1,4 +1,5 @@
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,8 +8,10 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -30,6 +33,7 @@ public class MyContactsForm extends javax.swing.JFrame {
     
     public MyContactsForm() {
         initComponents();
+        populateJTable();
     }
 
     /**
@@ -66,6 +70,8 @@ public class MyContactsForm extends javax.swing.JFrame {
         jTextAreaAddress = new javax.swing.JTextArea();
         jButtonBrowsePhoto = new javax.swing.JButton();
         jButtonAdd = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -242,6 +248,19 @@ public class MyContactsForm extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanelLoginForm2Layout = new javax.swing.GroupLayout(jPanelLoginForm2);
         jPanelLoginForm2.setLayout(jPanelLoginForm2Layout);
         jPanelLoginForm2Layout.setHorizontalGroup(
@@ -277,15 +296,22 @@ public class MyContactsForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLoginForm2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLoginForm2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanelLoginForm2Layout.createSequentialGroup()
                         .addComponent(jLabelProfilePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonBrowsePhoto))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanelLoginForm2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelLoginForm2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonBrowsePhoto))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLoginForm2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(80, 80, 80))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLoginForm2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         jPanelLoginForm2Layout.setVerticalGroup(
             jPanelLoginForm2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,15 +348,18 @@ public class MyContactsForm extends javax.swing.JFrame {
                             .addGroup(jPanelLoginForm2Layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addGroup(jPanelLoginForm2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonBrowsePhoto)
+                                    .addGroup(jPanelLoginForm2Layout.createSequentialGroup()
+                                        .addComponent(jButtonBrowsePhoto)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabelProfilePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelLoginForm2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelAddress)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(39, 39, 39)
-                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -347,12 +376,42 @@ public class MyContactsForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelLoginForm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addComponent(jPanelLoginForm2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanelLoginForm2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void populateJTable() {
+        ContactQuery cq = new ContactQuery();
+        ArrayList<Contact> cList = cq.contactList();
+        
+        String[] colNames = {"Id", "First Name", "Last Name", "Group", "Phone", "Email", "Address", "Image"};
+        Object[][] rows = new Object[cList.size()][8];
+        
+        for (int i = 0; i < cList.size(); i++) {
+            rows[i][0] = cList.get(i).getCid();
+            rows[i][1] = cList.get(i).getFname();
+            rows[i][2] = cList.get(i).getLname();
+            rows[i][3] = cList.get(i).getGroupc();
+            rows[i][4] = cList.get(i).getPhone();
+            rows[i][5] = cList.get(i).getEmail();
+            rows[i][6] = cList.get(i).getAddress();
+            ImageIcon pic = new ImageIcon(new ImageIcon
+                                     (cList.get(i).getPic()).
+                                      getImage().
+                                      getScaledInstance(70, 40, Image.SCALE_SMOOTH));
+            
+            rows[i][7] = pic;
+        }
+        
+        MyModel mmd = new MyModel(rows, colNames);
+        jTable1.setModel(mmd);
+        jTable1.setRowHeight(40);
+        jTable1.getColumnModel().getColumn(7).setPreferredWidth(70);
+    }
+    
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabelCloseMouseClicked
@@ -410,8 +469,6 @@ public class MyContactsForm extends javax.swing.JFrame {
         Contact c = new Contact(null, fname, lname, group, phone, email, address, img, 0);
         ContactQuery cq = new ContactQuery(); 
         cq.insertContact(c);
-
-
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     /**
@@ -468,7 +525,9 @@ public class MyContactsForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelLoginForm1;
     private javax.swing.JPanel jPanelLoginForm2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextAreaAddress;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldFirstName;

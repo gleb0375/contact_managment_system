@@ -1,7 +1,10 @@
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -49,6 +52,38 @@ public class ContactQuery {
         }
         
         return contactIsCreated;
+    }
+    
+    public ArrayList<Contact> contactList() {
+        ArrayList<Contact> clist = new ArrayList<>();
+        Connection con = MyConnection.getConnection();
+        Statement st;
+        ResultSet rs;
+        
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT `id`, `fname`, `lname`, `group`, `phone`, `email`, `address`, `pic` FROM `mycontacts`");
+            
+            Contact ct;
+            
+            while(rs.next()) {
+                ct = new Contact(rs.getInt("id"), 
+                               rs.getString("fname"), 
+                               rs.getString("lname"),
+                               rs.getString("group"),
+                               rs.getString("phone"),
+                               rs.getString("email"),
+                               rs.getString("address"),
+                               rs.getBytes("pic"),
+                               0);
+                
+                clist.add(ct);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ContactQuery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return clist;
     }
     
 }
